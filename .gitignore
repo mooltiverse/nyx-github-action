@@ -1,0 +1,12 @@
+# Build outputs
+build/
+
+# IntelliJ Idea files
+/.idea/
+
+# Visual Studio Code files
+.vscode/
+.settings/
+
+# MacOS files
+.DS_Store

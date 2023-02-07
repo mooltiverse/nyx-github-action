@@ -1,0 +1,23 @@
+name: 'Nyx'
+description: >
+  Automate semantic release tasks based on Git commit history, commit message conventions
+  and branching models, publish release artifacts and generate changelogs.
+inputs:
+  # TODO: map all input arguments here
+  command:
+    description: 'Which Nyx command to run'
+    required: false
+    default: 'infer'
+outputs:
+  # TODO: add outputs here
+  version:
+    description: 'The project version'
+runs:
+  using: 'docker'
+  # GitHub container registry doesn't work because it's private by default and requires authentication
+  #image: docker://gcr.io/mooltiverse/nyx:latest
+  image: docker://mooltiverse/nyx:latest
+  #entrypoint: '/usr/bin/nyx' # This is already defined in the Dockerfile
+  # TODO: map all other arguments here
+  args:
+    - ${{ inputs.command }}
