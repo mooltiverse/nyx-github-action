@@ -8,8 +8,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  test-action:
-    name: Test Action
+  test:
+    name: Test the Action
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.nyx.outputs.branch }}
@@ -28,41 +28,38 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: Test the Nyx GitHub Action with Infer
+    # Run a quick test (although it's shallow)
+    - name: Test the Action
       id: nyx
       # Run the action directly from the checked out repository to make sure we're testing the one that has been pushed
       uses: ./
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         command: 'infer'
-        # TODO: test other arguments here
-    # TODO: test the outputs from the command
-    #- name: Get the output from the Nyx GitHub Action
-    #  run: echo "The version was ${{ steps.nyx.outputs.version }}"
+        verbosity: 'DEBUG'
+        preset: 'extended'
+        releaseLenient: 'true'
+        stateFile: '.nyx-state.json'
+        summaryFile: '.nyx-summary.txt'
+    - name: Print version # This step uses the version inferred by Nyx
+      run: echo the inferred version is ${{ steps.nyx.outputs.version }}
 
-  test-output:
-    name: Test outputs
+  publish:
+    name: Publish the Action
     runs-on: ubuntu-latest
-    needs: test-action
+    needs: test
     steps:
-    - name: Print branch
-      run: echo ${{needs.test-action.outputs.branch}}
-    - name: Print bump
-      run: echo ${{needs.test-action.outputs.bump}}
-    - name: Print coreVersion
-      run: echo ${{needs.test-action.outputs.coreVersion}}
-    - name: Print latestVersion
-      run: echo ${{needs.test-action.outputs.latestVersion}}
-    - name: Print newRelease
-      run: echo ${{needs.test-action.outputs.newRelease}}
-    - name: Print newVersion
-      run: echo ${{needs.test-action.outputs.newVersion}}
-    - name: Print scheme
-      run: echo ${{needs.test-action.outputs.scheme}}
-    - name: Print timestamp
-      run: echo ${{needs.test-action.outputs.timestamp}}
-    - name: Print previousVersion
-      run: echo ${{needs.test-action.outputs.previousVersion}}
-    - name: Print primeVersion
-      run: echo ${{needs.test-action.outputs.primeVersion}}
-    - name: Print version
-      run: echo ${{needs.test-action.outputs.version}}
+    - name: Git checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Publish the Action with Nyx
+      id: nyx
+      # Run the action directly from the checked out repository to make sure we're testing the one that has been pushed
+      uses: ./
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        command: 'publish'
+

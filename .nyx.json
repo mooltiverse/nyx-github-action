@@ -1,0 +1,68 @@
+{
+  "preset":"simple",
+  "git":{
+    "remotes":{
+      "origin":{
+        "authenticationMethod":"USER_PASSWORD",
+        "user":"jdoe",
+        "password":"somepassword"
+      },
+      "replica":{
+        "authenticationMethod":"PUBLIC_KEY",
+        "privateKey": "{{#fileContent}}.ssh/id_ed25519{{/fileContent}}",
+        "passphrase": "somesecretpassphrase"
+      }
+    }
+  },
+  "initialVersion":"1.0.0",
+  "releaseTypes":{
+    "enabled":[ "mainline", "internal" ],
+    "publicationServices":[
+      "github"
+    ],
+    "remoteRepositories":[
+      "origin"
+    ],
+    "items":{
+      "mainline":{
+        "collapseVersions":false,
+        "filterTags":"^({{configuration.releasePrefix}})?([0-9]\\d*)\\.([0-9]\\d*)\\.([0-9]\\d*)$",
+        "gitCommit":"false",
+        "gitCommitMessage":"Release version {{version}}",
+        "gitPush":"true",
+        "gitTag":"true",
+        "gitTagMessage":"Tag version {{version}}",
+        "matchBranches":"^(master|main)$",
+        "matchEnvironmentVariables":{
+          "CI":"^true$"
+        },
+        "matchWorkspaceStatus":"CLEAN",
+        "publish":"true",
+        "versionRangeFromBranchName":false
+      },
+      "internal":{
+        "collapseVersions":true,
+        "collapsedVersionQualifier":"internal",
+        "description":"Internal release {{version}}",
+        "gitCommit":"false",
+        "gitPush":"false",
+        "gitTag":"false",
+        "publish":"false",
+        "versionRangeFromBranchName":false
+      }
+    }
+  },
+  "services":{
+    "github": {
+      "type": "GITHUB",
+      "options": {
+        "AUTHENTICATION_TOKEN": "{{#environmentVariable}}GH_TOKEN{{/environmentVariable}}",
+        "REPOSITORY_NAME": "nyx-github-action",
+        "REPOSITORY_OWNER": "mooltiverse"
+      }
+    }
+  },
+  "summaryFile":".nyx-summary.txt",
+  "stateFile":".nyx-state.json",
+  "verbosity":"INFO"
+}

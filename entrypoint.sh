@@ -25,14 +25,24 @@ done
 printf "clean arguments: %s\n" "$CLEAN_ARGS"
 
 ##### STEP 2: run Nyx
-OUTPUT=$(/usr/bin/nyx $CLEAN_ARGS)
+OUTPUT=$(/usr/bin/nyx $CLEAN_ARGS 2>&1)
+res=$?
 
 printf "Nyx output:\n"
 printf "--------------------------------\n"
 printf "%s\n" "$OUTPUT"
 printf "--------------------------------\n"
 
-# For each value from the output, discard everything before the '=' sign and set its corresponding output value
+if [ $res -ne 0 ]; then
+    echo "Nyx returned an error $res"
+    exit $res
+fi
+
+##### STEP 3: for each value from the output, discard everything before the '=' sign and set its corresponding output value
+# Remove all the log outputs from the output before we parse it
+OUTPUT=$(echo "$OUTPUT" | grep -v 'msg=' )
+
+# Parse values
 echo "branch=$(echo "$OUTPUT" | grep 'branch' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
 echo "bump=$(echo "$OUTPUT" | grep 'bump' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
 echo "coreVersion=$(echo "$OUTPUT" | grep 'core version' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT

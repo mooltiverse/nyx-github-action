@@ -1,0 +1,28 @@
+# An example, making Nyx push tags and repository changes, publish artifacts, and using presets
+
+name: Example publishing a version using Nyx
+on: [push]
+
+jobs:
+  infer-version:
+    name: Publish a version with Nyx
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Nyx publish
+      id: nyx
+      uses: actions/nyx-github-action@main
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NYX_VERBOSITY: 'INFO'
+      with:
+        command: 'publish'
+        dryRun: 'true' # remove this when you're sure
+        changelogPath: 'CHANGELOG.md'
+        preset: 'extended'
+        releaseLenient: 'true'
+        stateFile: '.nyx-state.json'
+        summaryFile: '.nyx-summary.txt'
