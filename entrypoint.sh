@@ -1,8 +1,8 @@
 #!/bin/sh
 
-printf "raw argument: %s\n" "$@"
-
 ##### STEP 1: prune arguments with no value
+
+#printf "raw arguments: %s\n" "$@"
 
 # We always need to produce the summary to parse the command outputs
 CLEAN_ARGS="--summary"
@@ -22,16 +22,14 @@ do
     fi
 done
 
-printf "clean arguments: %s\n" "$CLEAN_ARGS"
+#printf "clean arguments: %s\n" "$CLEAN_ARGS"
 
 ##### STEP 2: run Nyx
 OUTPUT=$(/usr/bin/nyx $CLEAN_ARGS 2>&1)
 res=$?
 
-printf "Nyx output:\n"
-printf "--------------------------------\n"
+# Print the output we captured
 printf "%s\n" "$OUTPUT"
-printf "--------------------------------\n"
 
 if [ $res -ne 0 ]; then
     echo "Nyx returned an error $res"

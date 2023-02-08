@@ -19,7 +19,7 @@ jobs:
       run: echo the inferred version is ${{ steps.nyx.outputs.version }}
 
   use-version:
-    name: Use the version in another job
+    name: Print the version
     runs-on: ubuntu-latest
     needs: infer-version
     steps:

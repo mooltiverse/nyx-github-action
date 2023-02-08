@@ -186,6 +186,12 @@ All the above outputs are also contained in the [state file](https://mooltiverse
 
 This is a [Docker Action](https://docs.github.com/en/actions/creating-actions/about-custom-actions#types-of-actions) so it's only available for Linux runners.
 
+## Versioning
+
+Although you can use a specific [version](https://github.com/mooltiverse/nyx-github-action/tags) for this action you are recommended to always use the latest version from the `main` branch (`uses: mooltiverse/nyx-github-action@main`).
+
+This action always uses the latest version of the [Nyx Docker image](https://hub.docker.com/repository/docker/mooltiverse/nyx).
+
 ## Support
 
 You can find support for Nyx by:

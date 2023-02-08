@@ -1,11 +1,11 @@
 # An example, making Nyx push tags and repository changes, publish artifacts, and using presets
 
-name: Example publishing a version using Nyx
+name: Example publishing a (new) version using Nyx
 on: [push]
 
 jobs:
   infer-version:
-    name: Publish a version with Nyx
+    name: Publish a version with Nyx (if needed)
     runs-on: ubuntu-latest
     steps:
     - name: Git checkout
