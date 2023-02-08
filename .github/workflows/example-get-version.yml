@@ -14,7 +14,7 @@ jobs:
         fetch-depth: 0
     - name: Nyx infer
       id: nyx
-      uses: actions/nyx-github-action@main
+      uses: mooltiverse/nyx-github-action@main
     - name: Print version # This step uses the version inferred by Nyx
       run: echo the inferred version is ${{ steps.nyx.outputs.version }}
 

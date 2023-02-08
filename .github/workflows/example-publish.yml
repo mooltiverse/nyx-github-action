@@ -14,7 +14,7 @@ jobs:
         fetch-depth: 0
     - name: Nyx publish
       id: nyx
-      uses: actions/nyx-github-action@main
+      uses: mooltiverse/nyx-github-action@main
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NYX_VERBOSITY: 'INFO'

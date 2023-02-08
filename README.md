@@ -23,7 +23,7 @@ jobs:
         fetch-depth: 0
     - name: Nyx infer
       id: nyx
-      uses: actions/nyx-github-action@main
+      uses: mooltiverse/nyx-github-action@main
     - name: Print version # This step uses the version inferred by Nyx
       run: echo the inferred version is ${{ steps.nyx.outputs.version }}
 ```
@@ -44,7 +44,7 @@ jobs:
         fetch-depth: 0
     - name: Nyx publish
       id: nyx
-      uses: actions/nyx-github-action@main
+      uses: mooltiverse/nyx-github-action@main
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NYX_VERBOSITY: 'INFO'
@@ -110,7 +110,7 @@ jobs:
         key: ${{ github.run_id }}-${{ github.job }}-nyx-state
         restore-keys: ${{ github.run_id }}-${{ github.job }}-nyx-state
     - name: Run nyx
-      uses: actions/nyx-github-action@main
+      uses: mooltiverse/nyx-github-action@main
       with:
         command: infer
         resume: true
