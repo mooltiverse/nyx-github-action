@@ -1,7 +1,5 @@
 name: 'Nyx GitHub Action'
-description: >
-  Automate semantic release tasks based on Git commit history, commit message conventions
-  and branching models, publish release artifacts and generate changelogs.
+description: 'Automate semantic release management'
 inputs:
   command:
     description: 'Selects which Nyx command to run. Allowed values are: clean, infer (default), make, mark, publish. When selecting infer Nyx will only read the repository and give you back the inferred version. make will build the changelog, mark will apply tags, make commits and push changes to the remote repository. publish will publish the release to the configured services'
