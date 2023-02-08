@@ -1,0 +1,2 @@
+# Make .sh files use only LF instead of CRLF
+*.sh text eol=lf

@@ -1,0 +1,27 @@
+# A simple example, just retrieving the version once Nyx has inferred
+
+name: Example retrieving the repository version using Nyx
+on: [push]
+
+jobs:
+  infer-version:
+    name: Infer the repository version with Nyx
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Nyx infer
+      id: nyx
+      uses: actions/nyx-github-action@main
+    - name: Print version # This step uses the version inferred by Nyx
+      run: echo the inferred version is ${{ steps.nyx.outputs.version }}
+
+  use-version:
+    name: Use the version in another job
+    runs-on: ubuntu-latest
+    needs: infer-version
+    steps:
+    - name: Print version # This step uses the version inferred by Nyx in another job
+      run: echo the inferred version is ${{needs.infer-version.outputs.version}}
