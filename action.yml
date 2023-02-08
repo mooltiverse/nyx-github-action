@@ -1,5 +1,8 @@
 name: 'Nyx GitHub Action'
 description: 'Automate semantic release management'
+branding:
+  icon: 'check'
+  color: 'blue'
 inputs:
   command:
     description: 'Selects which Nyx command to run. Allowed values are: clean, infer (default), make, mark, publish. When selecting infer Nyx will only read the repository and give you back the inferred version. make will build the changelog, mark will apply tags, make commits and push changes to the remote repository. publish will publish the release to the configured services'
