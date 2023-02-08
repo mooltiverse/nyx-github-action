@@ -1,4 +1,4 @@
-name: 'Nyx'
+name: 'Nyx GitHub Action'
 description: >
   Automate semantic release tasks based on Git commit history, commit message conventions
   and branching models, publish release artifacts and generate changelogs.
