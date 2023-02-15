@@ -1,7 +1,8 @@
 # A simple example, just retrieving the version once Nyx has inferred
 
 name: Example retrieving the repository version using Nyx
-on: [push]
+# Run only when manually triggered
+on: workflow_dispatch
 
 jobs:
   infer-version:
