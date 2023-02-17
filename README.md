@@ -90,32 +90,82 @@ To work around this you just have to configure the checkout action to always fet
 
 Just like for other means of using Nyx, in order to [separate Nyx actions and run other jobs or steps in between](https://mooltiverse.github.io/nyx/guide/user/introduction/combined-release-process/), you can run this action multiple times passing different commands (see the `command` parameter). Just make sure you enable the state file (using the `stateFile` parameter) and the resume flag (using the `resume` parameter).
 
-In case you run Nyx in separate jobs (instead of just separate steps within the same job), you may also wish to bring the state file ahead along with the pipeline progress so you can use the [cache action](https://github.com/actions/cache), like in this example:
-
 ```yaml
 jobs:
-  my job:
-    name: Do something
+  job1:
+    name: My job
     runs-on: ubuntu-latest
     steps:
     - name: Git checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: Set up the cache to store the Nyx state
-      uses: actions/cache@v3
-      with:
-        path: |
-          .nyx-state.json
-        key: ${{ github.run_id }}-${{ github.job }}-nyx-state
-        restore-keys: ${{ github.run_id }}-${{ github.job }}-nyx-state
-    - name: Run nyx
+    - name: Run nyx Infer
       uses: mooltiverse/nyx-github-action@main
       with:
         command: infer
         resume: true
         stateFile: .nyx-state.json
+    # Run other tasks here....
+    - name: Run nyx Publish
+      uses: mooltiverse/nyx-github-action@main
+      with:
+        command: publish
+        resume: true
+        stateFile: .nyx-state.json
 ```
+
+In case you run Nyx in separate jobs (instead of just separate steps within the same job), you may also wish to bring the state file ahead along with the pipeline progress so you can use the [cache action](https://github.com/actions/cache), like in this example:
+
+```yaml
+jobs:
+  job1:
+    name: My job 1
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up the cache to store and retrieve the Nyx state
+      uses: actions/cache@v3
+      with:
+        path: |
+          .nyx-state.json
+        key: ${{ github.run_id }}-nyx-state
+        restore-keys: ${{ github.run_id }}-nyx-state
+    - name: Run nyx Infer
+      uses: mooltiverse/nyx-github-action@main
+      with:
+        command: infer
+        resume: true
+        stateFile: .nyx-state.json
+
+  job2:
+    name: My job 2
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up the cache to store and retrieve the Nyx state
+      uses: actions/cache@v3
+      with:
+        path: |
+          .nyx-state.json
+        key: ${{ github.run_id }}-nyx-state
+        restore-keys: ${{ github.run_id }}-nyx-state
+    - name: Run nyx Publish
+      uses: mooltiverse/nyx-github-action@main
+      with:
+        command: publish
+        resume: true
+        stateFile: .nyx-state.json
+```
+
+Using separate jobs may also come very useful when using [matrix builds](https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs).
 
 ## Examples
 
