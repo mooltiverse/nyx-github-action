@@ -1,6 +1,8 @@
 [![](https://img.shields.io/badge/powered%20by-Nyx-blue)](https://github.com/mooltiverse/nyx) 
 [![License](https://img.shields.io/badge/License-Apache%202.0-grey.svg)](LICENSE.md) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-grey.svg)](CODE_OF_CONDUCT.md)
 
+[![Documentation](https://img.shields.io/static/v1?label=read%20the&message=documentation&color=blue&style=for-the-badge)](https://mooltiverse.github.io/nyx/)
+
 Use [Nyx](https://github.com/mooltiverse/nyx) from within GitHub Actions.
 
 [Nyx](https://github.com/mooltiverse/nyx) is a powerful, flexible and extremely configurable semantic release tool. You can put release management on auto pilot regardless of the kind of project, languages, tools and technologies or you can control any aspect of release management manually.
