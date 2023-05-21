@@ -4,13 +4,8 @@
     "remotes":{
       "origin":{
         "authenticationMethod":"USER_PASSWORD",
-        "user":"jdoe",
-        "password":"somepassword"
-      },
-      "replica":{
-        "authenticationMethod":"PUBLIC_KEY",
-        "privateKey": "{{#fileContent}}.ssh/id_ed25519{{/fileContent}}",
-        "passphrase": "somesecretpassphrase"
+        "user":"{{#environmentVariable}}GH_TOKEN{{/environmentVariable}}",
+        "password":"{{#environmentVariable}}GH_TOKEN{{/environmentVariable}}"
       }
     }
   },
