@@ -40,15 +40,15 @@ fi
 # Remove all the log outputs from the output before we parse it
 OUTPUT=$(echo "$OUTPUT" | grep -v 'msg=' )
 
-# Parse values
-echo "branch=$(echo "$OUTPUT" | grep 'branch' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "bump=$(echo "$OUTPUT" | grep 'bump' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "coreVersion=$(echo "$OUTPUT" | grep 'core version' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "latestVersion=$(echo "$OUTPUT" | grep 'latest version' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "newRelease=$(echo "$OUTPUT" | grep 'new release' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "newVersion=$(echo "$OUTPUT" | grep 'new version' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "scheme=$(echo "$OUTPUT" | grep 'scheme' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "timestamp=$(echo "$OUTPUT" | grep 'timestamp' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "previousVersion=$(echo "$OUTPUT" | grep 'previous version' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "primeVersion=$(echo "$OUTPUT" | grep 'prime version' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
-echo "version=$(echo "$OUTPUT" | grep 'current version' | sed 's/^.*\s*=\s*//')" >> $GITHUB_OUTPUT
+# Parse values and remove any newline character
+echo "branch=$(echo "$OUTPUT" | grep 'branch' | sed 's/^.*\s*=\s*//' | sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "bump=$(echo "$OUTPUT" | grep 'bump' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "coreVersion=$(echo "$OUTPUT" | grep 'core version' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "latestVersion=$(echo "$OUTPUT" | grep 'latest version' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "newRelease=$(echo "$OUTPUT" | grep 'new release' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "newVersion=$(echo "$OUTPUT" | grep 'new version' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "scheme=$(echo "$OUTPUT" | grep 'scheme' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "timestamp=$(echo "$OUTPUT" | grep 'timestamp' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "previousVersion=$(echo "$OUTPUT" | grep 'previous version' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "primeVersion=$(echo "$OUTPUT" | grep 'prime version' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
+echo "version=$(echo "$OUTPUT" | grep 'current version' | sed 's/^.*\s*=\s*//'| sed sed -z "s/\n//g")" >> $GITHUB_OUTPUT
