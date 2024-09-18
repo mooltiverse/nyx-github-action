@@ -1,10 +1,34 @@
-# The Nyx GitHub Action CI pipeline running on GitHub Actions
+# This workflow takes care of building, testing and publishing the project and
+# its artifacts.
+#
+# The whole process is split into jobs, each running on a different node.
+# Jobs are executed conditionally, only when required, in order to avoid wasting
+# build time on useless jobs.
+# Job dependencies also make longer and expensive tasks depend on the success
+# of previous, less expensive tasks. If upstream tasks fail, their dependencies
+# are not executed.
+#
+# This implies that, in order to avoid repeating tasks and start one job from
+# where previous ones have finished, intermediate artifacts are handed over
+# from one task to another. For this we use cache actions like actions/cache@v4.
+# Moreover, since we use Gradle and its powerful up-to-date checks, we also need
+# to propagate the Gradle cache across jobs. For this we use the Gradle remote
+# cache action burrunan/gradle-cache-action@v2.
+#
+# This way of modelling the workflow requires extra engineering but allows for
+# fine grained control over the pipeline as a whole. It also introduces some
+# overhead, but that comes with the benefit of controlling the workflow stage
+# by stage.
+#
+# Gradle is used so that we use the same build scripts locally on developers'
+# hosts and the CI/CD environment. Again, this improves portability and
+# consistency.
 
-name: Nyx GitHub Action workflow
+name: Workflow
 on: [push]
 # Avoid running multiple pipelines concurrently to avoid overlapping releases and tags
 concurrency:
-  group: project
+  group: ${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -62,4 +86,3 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         command: 'publish'
-
