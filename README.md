@@ -1,13 +1,21 @@
-[![](https://img.shields.io/badge/powered%20by-Nyx-blue)](https://github.com/mooltiverse/nyx) 
+# Nyx GitHub Action
+
+[![Release](https://img.shields.io/github/v/release/mooltiverse/nyx-github-action?sort=semver)](https://github.com/mooltiverse/nyx-github-action/releases)
+[![GitHub Actions](https://github.com/mooltiverse/nyx-github-action/actions/workflows/workflow.yml/badge.svg?branch=main)](https://github.com/mooltiverse/nyx-github-action/actions/workflows/workflow.yml)
+[![Powered by Nyx](https://img.shields.io/badge/powered%20by-Nyx-blue)](https://github.com/mooltiverse/nyx)
 [![License](https://img.shields.io/badge/License-Apache%202.0-grey.svg)](LICENSE.md) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-grey.svg)](CODE_OF_CONDUCT.md)
 
 [![Documentation](https://img.shields.io/static/v1?label=read%20the&message=documentation&color=blue&style=for-the-badge)](https://mooltiverse.github.io/nyx/)
+
+----
 
 Use [Nyx](https://github.com/mooltiverse/nyx) from within GitHub Actions.
 
 [Nyx](https://github.com/mooltiverse/nyx) is a powerful, flexible and extremely configurable semantic release tool. You can put release management on auto pilot regardless of the kind of project, languages, tools and technologies or you can control any aspect of release management manually.
 
 This is a companion project to Nyx, providing just the GitHub Action. For a reference on Nyx, its capabilities and configuration please jump to the **[documentation](https://mooltiverse.github.io/nyx/)**.
+
+----
 
 ## Usage
 
@@ -260,8 +268,8 @@ When posting issues please:
 
 ## Badge
 
-If you like Nyx please consider showing the badge [![](https://img.shields.io/badge/powered%20by-Nyx-blue)](https://github.com/mooltiverse/nyx) on your project page by inserting this snippet:
+If you like Nyx please consider showing the badge [![Powered by Nyx](https://img.shields.io/badge/Powered%20by-Nyx-blue)](https://github.com/mooltiverse/nyx) on your project page by inserting this snippet:
 
 ```md
-[![](https://img.shields.io/badge/powered%20by-Nyx-blue)](https://github.com/mooltiverse/nyx)
+[![Powered by Nyx](https://img.shields.io/badge/powered%20by-Nyx-blue)](https://github.com/mooltiverse/nyx)
 ```
