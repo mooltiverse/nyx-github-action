@@ -5,7 +5,23 @@
 [![Powered by Nyx](https://img.shields.io/badge/powered%20by-Nyx-blue)](https://github.com/mooltiverse/nyx)
 [![License](https://img.shields.io/badge/License-Apache%202.0-grey.svg)](LICENSE.md) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-grey.svg)](CODE_OF_CONDUCT.md)
 
-[![Documentation](https://img.shields.io/static/v1?label=read%20the&message=documentation&color=blue&style=for-the-badge)](https://mooltiverse.github.io/nyx/)
+[![Documentation](https://img.shields.io/static/v1?label=read%20the&message=documentation&color=blue&style=for-the-badge)](https://mooltiverse.github.io/nyx/docs/user/quick-start/github-action)
+
+----
+
+## WARNING: This Action is no longer supported
+
+> [!CAUTION]
+> **This Action is no longer supported and it has been replaced by the `mooltiverse/nyx` Action from the main [Nyx](https://github.com/mooltiverse/nyx) project**.
+>
+> The new Action is fully compatible with this one.
+>
+> You can use the new Action as a drop-in replacement by just replacing all the `mooltiverse/nyx-github-action` occurrences in your workflow files with `mooltiverse/nyx`.
+
+### Other references to the new Action
+
+- [Quick Start](https://mooltiverse.github.io/nyx/docs/user/quick-start/github-action)
+- [Reference](https://mooltiverse.github.io/nyx/docs/user/introduction/usage#using-the-github-action)
 
 ----
 
@@ -19,7 +35,10 @@ This is a companion project to Nyx, providing just the GitHub Action. For a refe
 
 ## Usage
 
-In the simples case you just need the Action to compute the version number from the repository commit history. [This example](https://github.com/mooltiverse/nyx-github-action/blob/main/.github/workflows/example-get-version.yml) shows how:
+> [!CAUTION]
+> The following documentation refers to the Action that is no longer supported and is only intended for historical reason. Switch to the `mooltiverse/nyx` as soon as possible.
+
+In the simplest case you just need the Action to compute the version number from the repository commit history. [This example](https://github.com/mooltiverse/nyx-github-action/blob/main/.github/workflows/example-get-version.yml) shows how:
 
 ```yaml
 jobs:

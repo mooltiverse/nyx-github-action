@@ -8,6 +8,7 @@ inputs:
     description: 'Selects which Nyx command to run. Allowed values are: clean, infer (default), make, mark, publish. When selecting infer Nyx will only read the repository and give you back the inferred version. make will build the changelog, mark will apply tags, make commits and push changes to the remote repository. publish will publish the release to the configured services'
     required: false
     default: 'infer'
+    deprecationMessage: The 'mooltiverse/nyx-github-action' is no longer supported and has been replaced by 'mooltiverse/nyx'. Use the 'mooltiverse/nyx' action as a drop-in replacement.
   bump:
     description: 'Instructs Nyx on which identifier to bump on the past version in order to build the new version. This option prevents Nyx to infer the identifier to bump from the commit history.'
     required: false
