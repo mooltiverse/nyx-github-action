@@ -1,31 +1,20 @@
-# The Nyx GitHub Action CI pipeline running on GitHub Actions
+# This workflow takes care of building, testing and publishing the project and
+# its artifacts.
 
-name: Nyx GitHub Action workflow
+name: CI/CD Pipeline
 on: [push]
 # Avoid running multiple pipelines concurrently to avoid overlapping releases and tags
 concurrency:
-  group: project
+  group: ${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    outputs:
-      branch: ${{ steps.nyx.outputs.branch }}
-      bump: ${{ steps.nyx.outputs.bump }}
-      coreVersion: ${{ steps.nyx.outputs.coreVersion }}
-      latestVersion: ${{ steps.nyx.outputs.latestVersion }}
-      newRelease: ${{ steps.nyx.outputs.newRelease }}
-      newVersion: ${{ steps.nyx.outputs.newVersion }}
-      scheme: ${{ steps.nyx.outputs.scheme }}
-      timestamp: ${{ steps.nyx.outputs.timestamp }}
-      previousVersion: ${{ steps.nyx.outputs.previousVersion }}
-      primeVersion: ${{ steps.nyx.outputs.primeVersion }}
-      version: ${{ steps.nyx.outputs.version }}
     steps:
     - name: Git checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
     # Run a quick test (although it's shallow)
@@ -44,6 +33,18 @@ jobs:
         summaryFile: '.nyx-summary.txt'
     - name: Print version # This step uses the version inferred by Nyx
       run: echo the inferred version is ${{ steps.nyx.outputs.version }}
+    outputs:
+      branch: ${{ steps.nyx.outputs.branch }}
+      bump: ${{ steps.nyx.outputs.bump }}
+      coreVersion: ${{ steps.nyx.outputs.coreVersion }}
+      latestVersion: ${{ steps.nyx.outputs.latestVersion }}
+      newRelease: ${{ steps.nyx.outputs.newRelease }}
+      newVersion: ${{ steps.nyx.outputs.newVersion }}
+      scheme: ${{ steps.nyx.outputs.scheme }}
+      timestamp: ${{ steps.nyx.outputs.timestamp }}
+      previousVersion: ${{ steps.nyx.outputs.previousVersion }}
+      primeVersion: ${{ steps.nyx.outputs.primeVersion }}
+      version: ${{ steps.nyx.outputs.version }}
 
   publish:
     name: Publish
@@ -51,7 +52,7 @@ jobs:
     needs: test
     steps:
     - name: Git checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: Publish the Action with Nyx
@@ -62,4 +63,3 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         command: 'publish'
-
