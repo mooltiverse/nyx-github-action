@@ -26,7 +26,7 @@ links:
   - name: 'GitHub Issues'
     type: PROJECT
     url: 'https://github.com/mooltiverse/nyx/issues'
-  - name: 'GitHub Repository'
+  - name: 'Git Repository'
     type: REPOSITORY
     url: 'https://github.com/mooltiverse/nyx-github-action'
   - name: 'Documentation'
@@ -40,7 +40,7 @@ links:
     url: 'https://github.com/mooltiverse/nyx-github-action/pulse'
 fields:
   tier: 3
-  lifecycle: Active
+  lifecycle: Deprecated
 customFields: []
 relationships:
   DEPENDS_ON:
